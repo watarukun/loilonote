@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+     <link rel="icon" href="favicon.jpg" type="image/x-icon">
+    <title>ロイロノート・スクールにログイン</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #fff;
+        }
+
+        #mediaContainer {
+            max-width: 105vw; /* 画面幅の90%まで */
+            max-height: 105vh; /* 画面高さの90%まで */
+            overflow: hidden;
+        }
+
+        #mediaContainer img,
+        #mediaContainer video {
+            width: 100%;
+            height: auto;      /* 比率を維持 */
+            display: block;
+        }
+
+        video {
+            display: none;      /* 初期非表示 */
+        }
+    </style>
+</head>
+<body>
+    <div id="mediaContainer">
+        <img id="image" src="loilonote.jpg" alt="LoiLoNote">
+        <video id="video" src="test_pv_.mp4" preload="none"></video>
+    </div>
+
+    <script>
+        const img = document.getElementById('image');
+        const video = document.getElementById('video');
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key.toLowerCase() === 'c') {
+                img.style.display = 'none';
+                video.style.display = 'block';
+                video.setAttribute('controls', '');
+                video.play();
+            }
+        });
+    </script>
+</body>
+</html>
