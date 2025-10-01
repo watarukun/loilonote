@@ -5,13 +5,14 @@
      <link rel="icon" href="favicon.jpg" type="image/x-icon">
     <title>ロイロノート・スクールにログイン</title>
     <style>
-        body {
+          body {
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             background: #fff;
+            flex-direction: column; /* ボタンを下に配置 */
         }
 
         #mediaContainer {
@@ -23,32 +24,72 @@
         #mediaContainer img,
         #mediaContainer video {
             width: 100%;
-            height: auto;      /* 比率を維持 */
+            height: 100%;      /* 比率を維持 */
             display: block;
         }
 
         video {
             display: none;      /* 初期非表示 */
+              width: 100%;
+            height: 100%; 
+        }
+
+    
+
+        /* ボタンのスタイル */
+        #buttons {
+            margin-top: 10px;
+            display: none; /* 初期非表示 */
+        }
+
+        #buttons button {
+            padding: 8px 16px;
+            font-size: 16px;
+            margin: 0 5px;
         }
     </style>
 </head>
 <body>
     <div id="mediaContainer">
         <img id="image" src="loilonote.jpg" alt="LoiLoNote">
-        <video id="video" src="test_pv_.mp4" preload="none"></video>
+        <video id="video" preload="none"></video>
+    </div>
+
+    <!-- 動画切替ボタン -->
+    <div id="buttons">
+        <button id="pv1">PV1</button>
+        <button id="pv2">PV2</button>
     </div>
 
     <script>
         const img = document.getElementById('image');
         const video = document.getElementById('video');
+        const pv1 = document.getElementById('pv1');
+        const pv2 = document.getElementById('pv2');
+        const buttons = document.getElementById('buttons');
 
+        // Cキーで画像→動画に切り替え
         document.addEventListener('keydown', (event) => {
             if (event.key.toLowerCase() === 'c') {
                 img.style.display = 'none';
                 video.style.display = 'block';
-                video.setAttribute('controls', '');
+                video.setAttribute('controls', ''); // コントロール表示
+                buttons.style.display = 'block';    // ボタン表示
+                if (!video.src) video.src = 'test_pv_.mp4';
                 video.play();
             }
+        });
+
+        // PV1ボタンで動画切替
+        pv1.addEventListener('click', () => {
+            video.src = 'test_pv_.mp4';
+            video.play();
+        });
+
+        // PV2ボタンで動画切替
+        pv2.addEventListener('click', () => {
+            video.src = 'pv2.mp4';
+            video.play();
         });
     </script>
 </body>
